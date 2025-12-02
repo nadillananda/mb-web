@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --background: #e8dcc8;
+  --foreground: #3b2f20;
+  --accent-dark: #7a5230;
+  --accent-light: #c49a6c;
+  --accent-soft: #f4ede1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
