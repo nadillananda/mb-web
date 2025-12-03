@@ -1,0 +1,135 @@
+{
+  "language": {
+    "english": "English",
+    "indonesian": "Bahasa Indonesia"
+  },
+  "nav": {
+    "home": "Home",
+    "infrastructure": "Infrastructure",
+    "development": "Development",
+    "systemEngineering": "System Engineering",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "MITRA BISNIS",
+    "headline": "Perform Your Business with Cutting-Edge IT Solutions",
+    "description": "We specialize in infrastructure, development, and system engineering to transform your business operations.",
+    "learnMore": "Explore More"
+  },
+  "infrastructure": {
+    "title": "Infrastructure",
+    "subtitle": "Building robust and scalable IT infrastructure that forms the foundation of your business success.",
+    "cards": [
+      {
+        "title": "Infrastructure",
+        "description": "Scalable and secure cloud solutions tailored to your business needs."
+      },
+      {
+        "title": "Network Solutions",
+        "description": "Robust network architecture design and implementation for optimal performance."
+      },
+      {
+        "title": "Data Centers",
+        "description": "Enterprise-grade data center solutions with high availability and redundancy."
+      },
+      {
+        "title": "Security Systems",
+        "description": "Comprehensive security infrastructure to protect your data."
+      }
+    ]
+  },
+  "development": {
+    "title": "Development",
+    "subtitle": "Custom software development solutions that drive innovation and efficiency.",
+    "cards": [
+      {
+        "title": "Web Development",
+        "description": "Modern, responsive web applications built with the latest technologies."
+      },
+      {
+        "title": "Mobile Development",
+        "description": "Native and cross-platform mobile applications for iOS and Android."
+      },
+      {
+        "title": "API Development",
+        "description": "RESTful and GraphQL APIs designed for scalability and performance."
+      },
+      {
+        "title": "Database Solutions",
+        "description": "Efficient database design and optimization for your applications."
+      }
+    ]
+  },
+  "systemEngineering": {
+    "title": "System Engineering",
+    "subtitle": "Comprehensive system engineering services, to build, optimize, and maintain complex IT systems.",
+    "cards": [
+      {
+        "title": "System Architecture",
+        "description": "Designing scalable and maintainable system architectures that grow with your business.",
+        "features": [
+          "Microservices Architecture",
+          "Event-Driven Systems",
+          "Distributed Systems",
+          "High Availability Design"
+        ]
+      },
+      {
+        "title": "DevOps & CI/CD",
+        "description": "Streamlining development workflows with automated pipelines and infrastructure as code.",
+        "features": [
+          "Continuous Integration",
+          "Continuous Deployment",
+          "Infrastructure as Code",
+          "Monitoring & Logging"
+        ]
+      },
+      {
+        "title": "Performance Optimization",
+        "description": "Enhancing system performance through optimization and best practices.",
+        "features": [
+          "Load Testing",
+          "Performance Tuning",
+          "Caching Strategies",
+          "Database Optimization"
+        ]
+      },
+      {
+        "title": "System Integration",
+        "description": "Seamlessly integrating disparate systems to create unified solutions.",
+        "features": [
+          "API Integration",
+          "Legacy System Integration",
+          "Third-Party Services",
+          "Data Synchronization"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with us to discuss how we can help transform your business.",
+    "formTitle": "Send us a Message",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Enter your name",
+    "emailLabel": "Your Email",
+    "emailPlaceholder": "Enter your email address",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Tell us about your project or inquiry",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "success": "Message sent successfully! We'll get back to you soon.",
+    "error": "Failed to send message. Please try again or contact us directly on Whatsapp",
+    "visitUsTitle": "Visit Us",
+    "locationLabel": "Location",
+    "locationName": "Mitra Bisnis",
+    "locationAddress": "Cikarang Timur, Kab. Bekasi, Indonesia",
+    "emailLabelStatic": "Email",
+    "phoneLabel": "Whatsapp"
+  },
+  "footer": {
+    "powered": "Powered with Next.JS © {{year}} Mitra Bisnis | All rights reserved."
+  }
+}
+
+

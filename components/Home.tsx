@@ -3,27 +3,29 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useLanguage } from './LanguageProvider';
 
 const Home = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const { t } = useLanguage();
 
   const heroBackground =
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80';
+    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1920&q=80';
 
   return (
     <section
       id="home"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden z-10 grain-texture grain-warm-brown"
       style={{
-        backgroundImage: `linear-gradient(rgba(58, 45, 32, 0.85), rgba(58, 45, 32, 0.6)), url(${heroBackground})`,
+        backgroundImage: `linear-gradient(rgba(47, 27, 18, 0.65), rgba(61, 40, 23, 0.60), rgba(47, 27, 18, 0.65)), url(${heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#3b2f20]/80 via-[#3b2f20]/50 to-transparent pointer-events-none" />
-      <div className="relative max-w-7xl mx-auto text-center text-white">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#2F1B12]/60 via-[#3D2817]/50 to-[#2F1B12]/55 pointer-events-none z-0" />
+      <div className="relative max-w-5xl mx-auto text-center text-white px-2 sm:px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -33,45 +35,42 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg"
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-[#F5F5DC] mb-6 sm:mb-8 drop-shadow-2xl tracking-tight leading-tight"
+            style={{
+              textShadow: '0 4px 8px rgba(0, 0, 0, 0.7), 0 8px 16px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.8)',
+              letterSpacing: '-0.02em',
+            }}
           >
-            Mitra Bisnis
+            {t('home.title')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg sm:text-xl text-[#fef3df] mb-8 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl lg:text-2xl text-[#F5F5DC] mb-4 sm:mb-6 max-w-3xl mx-auto px-2 sm:px-4 font-semibold leading-relaxed"
+            style={{
+              textShadow: '0 2px 4px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4)',
+            }}
           >
-            Empowering Your Business with Cutting-Edge IT Solutions
+            {t('home.headline')}
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-base sm:text-lg text-[#fcebd3] mb-12 max-w-2xl mx-auto"
+            className="text-sm sm:text-base lg:text-lg text-[#E8E0D0] mb-8 sm:mb-10 max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed"
+            style={{
+              textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+            }}
           >
-            We specialize in infrastructure, development, and system engineering
-            to transform your business operations and drive innovation.
+            {t('home.description')}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col items-center space-y-4"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                document
-                  .querySelector('#contact')
-                  ?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-8 py-4 bg-[#fef3df] text-[#4a3b2a] rounded-lg font-semibold text-lg shadow-lg hover:bg-[#fff7ea] transition-colors duration-300"
-            >
-              Get Started
-            </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -80,9 +79,12 @@ const Home = () => {
                   .querySelector('#infrastructure')
                   ?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-4 bg-transparent text-[#fef3df] border-2 border-[#fef3df] rounded-lg font-semibold text-lg hover:bg-[#fef3df]/10 transition-colors duration-300"
+              className="px-8 sm:px-10 py-4 sm:py-5 bg-transparent text-[#F5F5DC] border-2 border-[#F5F5DC] rounded-lg font-bold text-base sm:text-lg hover:bg-[#F5F5DC]/15 hover:border-[#E8E0D0] transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm"
+              style={{
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+              }}
             >
-              Learn More
+              {t('home.learnMore')}
             </motion.button>
           </motion.div>
         </motion.div>

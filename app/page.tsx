@@ -4,6 +4,7 @@ import Infrastructure from '@/components/Infrastructure';
 import Development from '@/components/Development';
 import SystemEngineering from '@/components/SystemEngineering';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 export default function MainPage() {
   return (
@@ -14,6 +15,7 @@ export default function MainPage() {
       <Development />
       <SystemEngineering />
       <Contact />
+      <Footer />
     </main>
   );
 }

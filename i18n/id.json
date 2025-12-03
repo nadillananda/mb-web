@@ -1,0 +1,135 @@
+{
+  "language": {
+    "english": "Inggris",
+    "indonesian": "Bahasa Indonesia"
+  },
+  "nav": {
+    "home": "Beranda",
+    "infrastructure": "Infrastruktur",
+    "development": "Pengembangan",
+    "systemEngineering": "Rekayasa Sistem",
+    "contact": "Kontak"
+  },
+  "home": {
+    "title": "MITRA BISNIS",
+    "headline": "Mengerjakan Bisnis Anda dengan Solusi TI Terkini",
+    "description": "Kami fokus pada infrastruktur, pengembangan, dan rekayasa sistem untuk mentransformasi operasional bisnis Anda.",
+    "learnMore": "Lihat Lebih Lanjut"
+  },
+  "infrastructure": {
+    "title": "Infrastruktur",
+    "subtitle": "Membangun infrastruktur TI yang kuat dan skalabel sebagai fondasi keberhasilan bisnis Anda.",
+    "cards": [
+      {
+        "title": "Infrastruktur",
+        "description": "Solusi cloud yang aman dan skalabel, disesuaikan dengan kebutuhan bisnis Anda."
+      },
+      {
+        "title": "Solusi Jaringan",
+        "description": "Perancangan dan implementasi arsitektur jaringan yang andal dan berkinerja tinggi."
+      },
+      {
+        "title": "Pusat Data",
+        "description": "Solusi data center kelas enterprise dengan ketersediaan tinggi dan redundansi."
+      },
+      {
+        "title": "Sistem Keamanan",
+        "description": "Infrastruktur keamanan menyeluruh untuk melindungi data Anda."
+      }
+    ]
+  },
+  "development": {
+    "title": "Pengembangan",
+    "subtitle": "Solusi pengembangan perangkat lunak kustom yang mendorong inovasi dan efisiensi.",
+    "cards": [
+      {
+        "title": "Pengembangan Web",
+        "description": "Aplikasi web modern dan responsif dengan teknologi terbaru."
+      },
+      {
+        "title": "Pengembangan Mobile",
+        "description": "Aplikasi mobile native dan cross-platform untuk iOS dan Android."
+      },
+      {
+        "title": "Pengembangan API",
+        "description": "API RESTful & GraphQL yang dirancang untuk skalabilitas dan performa."
+      },
+      {
+        "title": "Solusi Basis Data",
+        "description": "Perancangan dan optimasi basis data yang efisien untuk aplikasi Anda."
+      }
+    ]
+  },
+  "systemEngineering": {
+    "title": "Rekayasa Sistem",
+    "subtitle": "Layanan rekayasa sistem menyeluruh untuk membangun, mengoptimalkan, dan memelihara sistem TI yang kompleks.",
+    "cards": [
+      {
+        "title": "Arsitektur Sistem",
+        "description": "Merancang arsitektur sistem yang skalabel dan perawatan yang mudah, seiring pertumbuhan bisnis Anda.",
+        "features": [
+          "Arsitektur Microservices",
+          "Sistem Berbasis Event",
+          "Sistem Terdistribusi",
+          "Desain High Availability"
+        ]
+      },
+      {
+        "title": "DevOps & CI/CD",
+        "description": "Menyederhanakan alur kerja pengembangan dengan pipeline otomatis dan infrastructure as code.",
+        "features": [
+          "Continuous Integration",
+          "Continuous Deployment",
+          "Infrastructure as Code",
+          "Monitoring & Logging"
+        ]
+      },
+      {
+        "title": "Optimasi Performa",
+        "description": "Meningkatkan performa sistem melalui optimasi dan penerapan best practice.",
+        "features": [
+          "Load Testing",
+          "Performance Tuning",
+          "Strategi Caching",
+          "Optimasi Basis Data"
+        ]
+      },
+      {
+        "title": "Integrasi Sistem",
+        "description": "Mengintegrasikan berbagai sistem untuk membentuk solusi yang terpadu.",
+        "features": [
+          "Integrasi API",
+          "Integrasi Sistem Legacy",
+          "Layanan Pihak Ketiga",
+          "Sinkronisasi Data"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Hubungi Kami",
+    "subtitle": "Hubungi kami untuk berdiskusi bagaimana kami dapat membantu mentransformasi bisnis Anda.",
+    "formTitle": "Kirim Pesan",
+    "nameLabel": "Nama Anda",
+    "namePlaceholder": "Masukkan nama Anda",
+    "emailLabel": "Email Anda",
+    "emailPlaceholder": "Masukkan alamat email Anda",
+    "messageLabel": "Pesan Anda",
+    "messagePlaceholder": "Ceritakan tentang proyek atau kebutuhan Anda",
+    "submit": "Kirim Pesan",
+    "submitting": "Mengirim...",
+    "success": "Pesan berhasil dikirim! Kami akan segera menghubungi Anda.",
+    "error": "Gagal mengirim pesan. Silakan coba lagi atau hubungi kami langsung via Whatsapp",
+    "visitUsTitle": "Kunjungi Kami",
+    "locationLabel": "Lokasi",
+    "locationName": "Mitra Bisnis",
+    "locationAddress": "Cikarang Timur, Kab. Bekasi, Indonesia",
+    "emailLabelStatic": "Email",
+    "phoneLabel": "Whatsapp"
+  },
+  "footer": {
+    "powered": "Ditenagai oleh Next.JS © {{year}} Mitra Bisnis | Hak cipta dilindungi."
+  }
+}
+
+

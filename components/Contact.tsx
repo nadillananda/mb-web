@@ -3,26 +3,55 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { useLanguage } from './LanguageProvider';
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(
-      `New inquiry from ${formData.name || 'Prospective Client'}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:support@mitrabisnis.net?subject=${subject}&body=${body}`;
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } else {
+        setSubmitStatus('error');
+        console.error('Error sending email:', data.error);
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Error sending email:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -34,28 +63,29 @@ const Contact = () => {
     });
   };
 
-  // Google Maps embed URL for Stadion Wibawa Mukti, Cikarang, Indonesia
-  // Coordinates: -6.301944, 107.150833
+  // Google Maps embed URL for IZAURA KAB BEKASI, Cikarang, Indonesia
 
   return (
     <section
       id="contact"
       ref={ref}
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#2F1B12] to-[#2F1B12]"
+      className="min-h-screen flex items-center py-24 px-4 sm:px-6 lg:px-8 relative z-10 grain-texture grain-dark-brown"
+      style={{
+        background: 'linear-gradient(180deg, #3D2817 0%, #2F1B12 20%, #3D2817 50%, #2F1B12 80%, #2F1B12 100%)',
+      }}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-[#e8dcc8] mb-4">
-            Contact Us
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#F5F5DC] mb-4">
+            {t('contact.title')}
           </h2>
-          <p className="text-xl text-[#e8dcc8] max-w-3xl mx-auto">
-            Get in touch with us to discuss how we can help transform your
-            business.
+          <p className="text-xl text-[#F5F5DC] max-w-3xl mx-auto">
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -65,18 +95,28 @@ const Contact = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.6 }}
-            className="bg-[#fffaf3] p-8 rounded-xl shadow-lg"
+            className="bg-[#FAF8F3] p-8 rounded-xl shadow-lg grain-texture grain-beige-card relative"
           >
-            <h3 className="text-2xl font-bold text-[#2F1B12] mb-6">
-              Send us a Message
+            <h3 className="text-2xl font-bold text-[#3D2817] mb-6 relative z-10">
+              {t('contact.formTitle')}
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {submitStatus === 'success' && (
+              <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg relative z-10">
+                <p className="font-medium">{t('contact.success')}</p>
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg relative z-10">
+                <p className="font-medium">{t('contact.error')}</p>
+              </div>
+            )}
+            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-[#5c4a32] mb-2"
+                  className="block text-sm font-medium text-[#3D2817] mb-2"
                 >
-                  Name
+                  {t('contact.nameLabel')}
                 </label>
                 <input
                   type="text"
@@ -85,16 +125,16 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-[#d6c4a6] rounded-lg focus:ring-2 focus:ring-[#7a5230] focus:border-transparent outline-none transition-all bg-white"
-                  placeholder="Your Name"
+                  className="w-full px-4 py-3 border border-[#5C4033] rounded-lg focus:ring-2 focus:ring-[#5C4033] focus:border-transparent outline-none transition-all bg-[#FAF8F3] text-[#3D2817]"
+                  placeholder={t('contact.namePlaceholder')}
                 />
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-[#5c4a32] mb-2"
+                  className="block text-sm font-medium text-[#3D2817] mb-2"
                 >
-                  Email
+                  {t('contact.emailLabel')}
                 </label>
                 <input
                   type="email"
@@ -103,16 +143,16 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-[#d6c4a6] rounded-lg focus:ring-2 focus:ring-[#7a5230] focus:border-transparent outline-none transition-all bg-white"
-                  placeholder="your.email@example.com"
+                  className="w-full px-4 py-3 border border-[#5C4033] rounded-lg focus:ring-2 focus:ring-[#5C4033] focus:border-transparent outline-none transition-all bg-[#FAF8F3] text-[#3D2817]"
+                  placeholder={t('contact.emailPlaceholder')}
                 />
               </div>
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-[#5c4a32] mb-2"
+                  className="block text-sm font-medium text-[#3D2817] mb-2"
                 >
-                  Message
+                  {t('contact.messageLabel')}
                 </label>
                 <textarea
                   id="message"
@@ -121,17 +161,18 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-[#d6c4a6] rounded-lg focus:ring-2 focus:ring-[#7a5230] focus:border-transparent outline-none transition-all resize-none bg-white"
-                  placeholder="Your Message"
+                  className="w-full px-4 py-3 border border-[#5C4033] rounded-lg focus:ring-2 focus:ring-[#5C4033] focus:border-transparent outline-none transition-all resize-none bg-[#FAF8F3] text-[#3D2817]"
+                  placeholder={t('contact.messagePlaceholder')}
                 />
               </div>
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full px-8 py-4 bg-[#7a5230] text-white rounded-lg font-semibold text-lg shadow-lg hover:bg-[#8c6139] transition-colors duration-300"
+                disabled={isSubmitting}
+                whileHover={!isSubmitting ? { scale: 1.05 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.95 } : {}}
+                className="w-full px-8 py-4 bg-[#5C4033] text-[#F5F5DC] rounded-lg font-semibold text-lg shadow-lg hover:bg-[#3D2817] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? t('contact.submitting') : t('contact.submit')}
               </motion.button>
             </form>
           </motion.div>
@@ -143,30 +184,30 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <div className="bg-[#fffaf3] p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-[#4a3b2a] mb-6">
-                Visit Us
+            <div className="bg-[#FAF8F3] p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-[#3D2817] mb-6 relative z-10">
+                {t('contact.visitUsTitle')}
               </h3>
-              <div className="space-y-4 text-[#5c4a32]">
+              <div className="space-y-4 text-[#3D2817] relative z-10">
                 <div className="flex items-start">
                   <span className="text-2xl mr-3">📍</span>
                   <div>
-                    <p className="font-semibold">Location</p>
-                    <p>Mitra Bisnis</p>
-                    <p>Cikarang Timur, Kab. Bekasi, Indonesia</p>
+                    <p className="font-semibold">{t('contact.locationLabel')}</p>
+                    <p>{t('contact.locationName')}</p>
+                    <p>{t('contact.locationAddress')}</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <span className="text-2xl mr-3">📧</span>
                   <div>
-                    <p className="font-semibold">Email</p>
+                    <p className="font-semibold">{t('contact.emailLabelStatic')}</p>
                     <p>support@mitrabisnis.net</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <span className="text-2xl mr-3">📞</span>
                   <div>
-                    <p className="font-semibold">Phone</p>
+                    <p className="font-semibold">{t('contact.phoneLabel')}</p>
                     <p>+62 819-0680-4988</p>
                   </div>
                 </div>
@@ -174,17 +215,17 @@ const Contact = () => {
             </div>
 
             {/* Google Maps */}
-            <div className="bg-[#fffaf3] p-4 rounded-xl shadow-lg overflow-hidden">
-              <div className="w-full h-64 sm:h-80 lg:h-96 rounded-lg overflow-hidden">
+            <div className="bg-[#FAF8F3] p-4 rounded-xl shadow-lg overflow-hidden">
+              <div className="w-full h-64 sm:h-80 lg:h-96 rounded-lg overflow-hidden relative">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.523456789!2d107.150833!3d-6.301944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698b8b8b8b8b8b%3A0x8b8b8b8b8b8b8b8b!2sStadion%20Wibawa%20Mukti%2C%20Cikarang%20Barat%2C%20Cikarang%2C%20Bekasi%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
+                  src="https://www.google.com/maps?q=IZAURA+KAB+BEKASI+Cikarang+Indonesia&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Mitra Bisnis Perkasa Location - Stadion Wibawa Mukti, Cikarang, Indonesia"
+                  title="Mitra Bisnis Location - IZAURA KAB BEKASI, Cikarang, Indonesia"
                   className="w-full h-full"
                 ></iframe>
               </div>
